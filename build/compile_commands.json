@@ -1,0 +1,56 @@
+[
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/candidate.cpp.o -c /workspaces/FuzzyBrain/src/candidate.cpp",
+  "file": "/workspaces/FuzzyBrain/src/candidate.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/candidate.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/dataset_reader.cpp.o -c /workspaces/FuzzyBrain/src/dataset_reader.cpp",
+  "file": "/workspaces/FuzzyBrain/src/dataset_reader.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/dataset_reader.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/engine.cpp.o -c /workspaces/FuzzyBrain/src/engine.cpp",
+  "file": "/workspaces/FuzzyBrain/src/engine.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/engine.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/main.cpp.o -c /workspaces/FuzzyBrain/src/main.cpp",
+  "file": "/workspaces/FuzzyBrain/src/main.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/main.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/probability_engine.cpp.o -c /workspaces/FuzzyBrain/src/probability_engine.cpp",
+  "file": "/workspaces/FuzzyBrain/src/probability_engine.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/probability_engine.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/question.cpp.o -c /workspaces/FuzzyBrain/src/question.cpp",
+  "file": "/workspaces/FuzzyBrain/src/question.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/question.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/relation.cpp.o -c /workspaces/FuzzyBrain/src/relation.cpp",
+  "file": "/workspaces/FuzzyBrain/src/relation.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/relation.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/session_controller.cpp.o -c /workspaces/FuzzyBrain/src/session_controller.cpp",
+  "file": "/workspaces/FuzzyBrain/src/session_controller.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/session_controller.cpp.o"
+},
+{
+  "directory": "/workspaces/FuzzyBrain/build",
+  "command": "/usr/bin/c++  -I/workspaces/FuzzyBrain/src/headers -std=gnu++20 -fexceptions -o CMakeFiles/fuzzybrain.dir/src/ui_console.cpp.o -c /workspaces/FuzzyBrain/src/ui_console.cpp",
+  "file": "/workspaces/FuzzyBrain/src/ui_console.cpp",
+  "output": "CMakeFiles/fuzzybrain.dir/src/ui_console.cpp.o"
+}
+]

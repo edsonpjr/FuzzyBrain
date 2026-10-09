@@ -1,0 +1,71 @@
+/**
+ * @mainpage FuzzyBrain — Plataforma de Lógica Difusa
+ * 
+ * @section intro_sec 1. Visão Geral do Projeto
+ * O **FuzzyBrain** é uma plataforma desenvolvida como projeto prático para a disciplina de **Estrutura de Dados e Orientação a Objeto (EDOO)** do **Centro de Informática da UFPE (CIn UFPE)**.
+ * 
+ * O sistema permite criar, executar e orquestrar fluxos lógicos baseados em regras de lógica difusa (*fuzzy logic*) e inferência estatística, viabilizando sistemas de recomendação customizados (como quizzes inteligentes e motores de predição no estilo *Akinator*). Este ecossistema documenta a fundação do sistema: o **Milestone 1 (Core)**.
+ * 
+ * @section escopo_sec 2. Escopo do Milestone 1 (Core)
+ * 
+ * @subsection escopo_in O que está NO ESCOPO:
+ * - **Modelagem Matemática:** Mapeamento de conjuntos difusos (*Fuzzy Sets*), variáveis linguísticas e regras associativas.
+ * - **Ingestão de Dados:** Carregamento de bases de conhecimento dinâmicas a partir de arquivos planos (`.txt`).
+ * - **Motor de Busca de Próximas Perguntas:** Seleção inteligente por meio de cálculos de probabilidade, variância e regras de avaliação de entropia.
+ * - **Motor de Inferência Heurística:** Aplicação de regras bayesianas para cálculo de probabilidades.
+ * - **Estruturação Orientada a Objetos:** Uso de classes abstratas, herança, polimorfismo e forte encapsulamento.
+ * - **Uso de Estruturas de Dados:** Manipulação de regras e mapas para dicionários de variáveis.
+ * - **Interface:** Interação simplificada em modo console (CLI).
+ * 
+ * @subsection escopo_out O que está FORA DO ESCOPO:
+ * - APIs RESTful / Swagger, Interfaces Gráficas (Web/Dashboard), Bancos de Dados Relacionais/NoSQL e autenticação de usuários.
+ * 
+ * @section arquitetura_sec 3. Arquitetura do Sistema e Estrutura de Dados
+ * O projeto foi estruturado seguindo os princípios **SOLID**, **Clean Code** e padrões de projeto consolidados:
+ * 
+ * - **Orquestração de Sessão (@ref Engine):** Atua como o *SessionController*, gerenciando o laço principal de execução (`while`) e o ciclo de vida da interação (Entropia -> Pergunta -> Bayes -> LOM/SOM -> Validação).
+ * - **Camada de I/O (@ref DatasetReader):** Serviço encapsulado responsável por abrir arquivos `.txt`, realizar o *parsing* iterativo de strings e tratamento formal de exceções (`std::ifstream::failure`).
+ * - **Interface via Terminal (Main.cpp / @ref ConsoleUI):** Entrada e saída tratadas usando `std::cin` com sanitização e validação de entradas inválidas, além de configuração de localidade para UTF-8.
+ * - **Encapsulamento de Domínio:** 
+ *   - @ref Question (Atributos): Abstração textual das propriedades consultadas.
+ *   - @ref Candidate (Hipóteses): Representação das entidades que o motor tenta prever.
+ *   - @ref Relation (Relação): Armazena o grau de pertinência numérico entre perguntas e candidatos de forma isolada.
+ * - **Otimização de Memória:** Uso extensivo de C++ moderno, incluindo gerenciamento de ponteiros inteligentes (`std::unique_ptr`) e otimização de buscas usando tabelas hash (`std::unordered_map`) para acesso em complexidade O(1).
+ * 
+ * @section requisitos_sec 4. Mapeamento de Requisitos Funcionais (RF)
+ * 
+ * - **RF1 — Carregamento e Parse:** Implementado em @ref DatasetReader::load_file, que desserializa dados puros convertendo-os em objetos de domínio em memória (@ref QuestionRow).
+ * - **RF2 — Motor de Entropia:** Algoritmo probabilístico iterativo aplicado sobre os atributos disponíveis para selecionar a pergunta de maior variância/ganho de informação (Entropia de Shannon).
+ * - **RF3 — Inferência Bayesiana:** Mecanismo que recalcula a distribuição de probabilidades de todas as hipóteses baseado nas respostas dadas pelo usuário através do Teorema de Bayes.
+ * - **RF4 — Heurística de Outliers (LOM/SOM):** Algoritmo que varre a matriz de probabilidades em busca de distanciamento estatístico significativo utilizando métodos como *Largest of Maximum* (LOM) ou *Smallest of Maximum* (SOM) para disparar a sugestão.
+ * - **RF5 — Validação e Ciclo de Rejeição:** Caso a heurística dispare uma sugestão de hipótese (ex: "É este o veículo?"), e o usuário a **rejeite (NÃO)**, a engine isola a hipótese falha e retrocede ao fluxo de entropia para buscar a próxima melhor pergunta/sugestão. Se aceita (SIM), o loop se encerra com sucesso.
+ * 
+ * @section rnf_sec 5. Requisitos Não Funcionais (RNF)
+ * - **RNF1 — Arquitetura e Clean Code:** Núcleo matemático isolado, forte aderência ao *const-correctness*, tratamento de exceções robusto no I/O do `.txt` e uso de `std::unique_ptr` para gestão segura de memória.
+ * - **RNF2 — Gestão de Configuração:** Repositório hospedado no GitLab do CIn UFPE, utilizando modelo de *feature branches* por cálculo matemático e Merge Requests aprovados.
+ * 
+ * @section roadmap_sec 6. Visão de Futuro (Próximos Milestones)
+ * O sistema foi projetado pensando em uma arquitetura em camadas futuras para transformar o núcleo em uma plataforma web completa:
+ * 
+ * - **Milestone 2 (API RESTful):** Disponibilização como serviço HTTP/JSON isolado por DTOs, documentação via Swagger e controle de estado de sessões de execução.
+ * - **Milestone 3 (Persistência e Gestão):** Substituição de arquivos planos por Bancos de Dados reais (SQL/NoSQL) via camada de Repositórios/Storages, controle de acesso/autenticação (Auth) e CRUD de conjuntos fuzzy customizados.
+ * - **Milestone 4 (Plataforma Web):** Desenvolvimento de uma interface gráfica amigável com área administrativa, editor visual de regras fuzzy e dashboard de histórico de execuções.
+ * 
+ * @section dicionario_sec 7. Dicionário de Termos Técnicos
+ * - **Dataset (Conjunto de Dados):** A Base de Conhecimento do sistema. No M1, é o arquivo `.txt` que mapeia veículos (ex: Fiat Pulse, Jeep Renegade) a seus atributos em valores difusos de 0.0 a 1.0.
+ * - **Lógica Difusa (Fuzzy Logic):** Lógica que trabalha com graus de pertinência parciais. Permite interpretar que um valor numérico pode pertencer a mais de uma categoria linguística ao mesmo tempo (ex: 70% justo e 30% caro).
+ * - **Entropia (Entropia de Shannon):** Medida de incerteza ou desordem dos dados. O motor a utiliza para descobrir qual pergunta elimina o maior número de dúvidas de uma única vez.
+ * - **Variância:** Medida estatística de dispersão que indica o quão distantes os valores estão da média, auxiliando a refinar o funil de possibilidades.
+ * - **Inferência:** O processo dedutivo do motor, aplicando as regras matemáticas sobre as respostas dadas para computar conclusões novas.
+ * - **Heurística:** Abordagem algorítmica rápida para tomar decisões excelentes sem a necessidade de processar todas as infinitas combinações do universo. É o gatilho de parada das perguntas.
+ * - **Regras Bayesianas (Teorema de Bayes):** Fórmula matemática usada para atualizar a distribuição de probabilidades das hipóteses a cada nova evidência/resposta fornecida.
+ * - **Outliers (Pontos Fora da Curva):** Valores que se distanciam drasticamente da média. No sistema, quando uma hipótese atinge uma probabilidade muito superior às demais, ela se torna um outlier e dispara o palpite.
+ * - **LOM / SOM:** Técnicas de decisão e defuzzificação. O **LOM (Largest of Maximum)** escolhe a hipótese com maior valor absoluto em critérios de desempate no pico máximo; o **SOM (Smallest of Maximum)** escolhe o menor valor absoluto no pico de empates.
+ * 
+ * @author / Equipe FuzzyBrain
+ * @author André Santos (agds@cin.ufpe.br)
+ * @author Edson Júnio (ejapj@cin.ufpe.br)
+ * @author Felipe Farias (fjbf@cin.ufpe.br)
+ * @author Rogério Henrique (rhmt@cin.ufpe.br)
+ * @date 2026
+ */
